@@ -8,11 +8,11 @@ tags:
 ---
 
 # mra
-![](https://i.imgur.com/49iqumD.png)
+![](49iqumD.png)
 
-![img](https://i.imgur.com/FuvJDpX.png)
+![img](FuvJDpX.png)
 
-![img](https://i.imgur.com/3gGqHMC.png)
+![img](3gGqHMC.png)
 
 ## 環境設置
 
@@ -211,17 +211,17 @@ add sp, sp, #0x490
 
 
 
-![](https://i.imgur.com/Z8LVbx5.png)
+![](Z8LVbx5.png)
 
-![](https://i.imgur.com/3QdQD5F.png)
+![](3QdQD5F.png)
 
 那麼這樣我們的 buffer overflow 的構造 ROP 的方式就會跟以往不太一樣。以下為 layout。
 
-![](https://i.imgur.com/T0myzaL.png)
+![](T0myzaL.png)
 
 我們的目標就是覆蓋到 vuln's stack frame 上的 `x30` 藉此控制到 return 後的流程。
 
-![img](https://i.imgur.com/1v2Ebom.png)
+![img](1v2Ebom.png)
 
 ## 尋找 gadget
 
@@ -229,7 +229,7 @@ add sp, sp, #0x490
 
 而這裡我挑的是這段:
 
-![](https://i.imgur.com/iSM4UfH.png)
+![](iSM4UfH.png)
 
 
 
@@ -303,6 +303,6 @@ p.interactive()
 
 # Resource
 
-[Arm sysca number table](https://github.com/torvalds/linux/blob/v4.17/include/uapi/asm-generic/unistd.h)
+[Arm syscall number table](https://github.com/torvalds/linux/blob/v4.17/include/uapi/asm-generic/unistd.h)
 
 [A Guide to ARM64 / AArch64 Assembly on Linux with Shecodes and Cryptography](https://modexp.wordpress.com/2018/10/30/arm64-assembly/)
