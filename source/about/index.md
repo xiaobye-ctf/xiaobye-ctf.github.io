@@ -3,7 +3,7 @@ title: about
 date: 2021-09-05 16:41:27
 ---
 # whoami
-我是小白,平常常用xiaobye的暱稱參加資安活動.
+我是小白,平常常用 xiaobye 的暱稱參加資安活動.
 
 # Certifications
 - OSCP

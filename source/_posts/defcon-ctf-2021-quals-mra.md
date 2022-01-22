@@ -5,6 +5,8 @@ tags:
 - defcon ctf 2021 quals
 - pwn
 - aarch64
+categories:
+- CTF
 ---
 
 # mra

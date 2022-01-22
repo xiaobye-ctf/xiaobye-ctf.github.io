@@ -4,6 +4,8 @@ date: 2022-01-23 05:31:09
 tags:
 - defcon ctf 2021 quals
 - pwn
+categories:
+- CTF 
 ---
 
 # nooopster
