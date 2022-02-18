@@ -10,7 +10,8 @@ categories:
 ---
 # logger
 [題目來源](https://github.com/u1f383/My-CTF-Challenges)
-![](https://i.imgur.com/9pV0RjK.png)
+![](9pV0RjK.png)
+<!--more-->
 
 ## source code
 此題提供比賽期間有提供 source code ，為一題選單題。
@@ -85,13 +86,13 @@ void edit()
 
     ...
 ```
-![](https://i.imgur.com/DXYGxdr.png)
+![](DXYGxdr.png)
 當我們將 `len` 設為 1 時，`me` 將會如下圖
 `me` 當前所指向的地址為 `0x00005555555598f0`，而 `0x00005555555598f0 + 0x10` 剛好為 `0x0000555555559900`。
-![](https://i.imgur.com/KG73UsQ.png)
+![](KG73UsQ.png)
 
 且 `me` 的地址等價於 `&logs[7]`，如此一來我們便可以利用 `edit` 且 `idx` 設為 7，對 `((Log)me)->msg)` ( 也就是 `0x0000555555559a00` ) 的內容進行改寫，但是只能寫入一個 `\x00` 。
-![](https://i.imgur.com/aEQYQ8Z.png)
+![](aEQYQ8Z.png)
 
 ### 從寫入 1 byte `\x00` 到任意長度任意內容
 
@@ -105,16 +106,16 @@ void edit()
 6. new 一個大小為 96 的 LOG 放到 log\[0\]
 
 執行完以上步驟，此時的 `logs[0]` 所指向的內容如下圖
-![](https://i.imgur.com/aplCyuz.png)
+![](aplCyuz.png)
 
 6. edit 且 idx 設為 7 
 
 到了這步，我們已經可以控制 `0x0000555555559900` 的內容了，如此一來便能夠實現寫入任意長度任意內容。
-![](https://i.imgur.com/wvZlhft.png)
+![](wvZlhft.png)
 
 7. edit 且 idx 設為 0 寫入內容為 AAAAAAAA
 
-![](https://i.imgur.com/zsuXfBH.png)
+![](zsuXfBH.png)
 
 ### 製作出 read/write primitives
 以下為 pseudo code
@@ -297,3 +298,4 @@ if local:
 
 p.interactive()
 ```
+
