@@ -27,21 +27,21 @@
 <meta property="og:site_name" content="xiaobyeの狗窩">
 <meta property="og:description" content="logger題目來源">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://i.imgur.com/9pV0RjK.png">
-<meta property="og:image" content="https://i.imgur.com/DXYGxdr.png">
-<meta property="og:image" content="https://i.imgur.com/KG73UsQ.png">
-<meta property="og:image" content="https://i.imgur.com/aEQYQ8Z.png">
-<meta property="og:image" content="https://i.imgur.com/aplCyuz.png">
-<meta property="og:image" content="https://i.imgur.com/wvZlhft.png">
-<meta property="og:image" content="https://i.imgur.com/zsuXfBH.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/9pV0RjK.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/DXYGxdr.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/KG73UsQ.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/aEQYQ8Z.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/aplCyuz.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/wvZlhft.png">
+<meta property="og:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/zsuXfBH.png">
 <meta property="article:published_time" content="2022-02-18T07:16:58.000Z">
-<meta property="article:modified_time" content="2022-02-18T09:36:18.225Z">
+<meta property="article:modified_time" content="2022-02-18T09:41:43.672Z">
 <meta property="article:author" content="xiaobye">
 <meta property="article:tag" content="pwn">
 <meta property="article:tag" content="AIS3 EOF 2021 final">
 <meta property="article:tag" content="heap">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/9pV0RjK.png">
+<meta name="twitter:image" content="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/9pV0RjK.png">
 
 <link rel="canonical" href="http://example.com/2022/02/18/AIS3-EOF-2021-final-logger/">
 
@@ -201,7 +201,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-02-18 15:16:58 / Modified: 17:36:18" itemprop="dateCreated datePublished" datetime="2022-02-18T15:16:58+08:00">2022-02-18</time>
+              <time title="Created: 2022-02-18 15:16:58 / Modified: 17:41:43" itemprop="dateCreated datePublished" datetime="2022-02-18T15:16:58+08:00">2022-02-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,7 +224,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="logger"><a href="#logger" class="headerlink" title="logger"></a>logger</h1><p><a target="_blank" rel="noopener" href="https://github.com/u1f383/My-CTF-Challenges">題目來源</a><br><img src="https://i.imgur.com/9pV0RjK.png"></p>
+        <h1 id="logger"><a href="#logger" class="headerlink" title="logger"></a>logger</h1><p><a target="_blank" rel="noopener" href="https://github.com/u1f383/My-CTF-Challenges">題目來源</a><br><img src="/2022/02/18/AIS3-EOF-2021-final-logger/9pV0RjK.png"></p>
 <span id="more"></span>
 
 <h2 id="source-code"><a href="#source-code" class="headerlink" title="source code"></a>source code</h2><p>此題提供比賽期間有提供 source code ，為一題選單題。<br>以下為 <code>main</code> 的內容</p>
@@ -235,8 +235,8 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">edit</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> idx;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;idx: &quot;</span>);</span><br><span class="line">    idx = getu64();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;msg: &quot;</span>);</span><br><span class="line">    fgets(logs[idx]-&gt;msg, logs[idx]-&gt;len, <span class="built_in">stdin</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="利用分析"><a href="#利用分析" class="headerlink" title="利用分析"></a>利用分析</h2><h3 id="利用變數-me-控制-logs-的內容"><a href="#利用變數-me-控制-logs-的內容" class="headerlink" title="利用變數 me 控制 logs 的內容"></a>利用變數 me 控制 logs 的內容</h3><p>在執行到下面這段 code 的之前，heap bins 的 layout 大概如下圖</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    </span><br><span class="line">me = <span class="built_in">malloc</span>(len);</span><br><span class="line">fgets(me, len, <span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/DXYGxdr.png"><br>當我們將 <code>len</code> 設為 1 時，<code>me</code> 將會如下圖<br><code>me</code> 當前所指向的地址為 <code>0x00005555555598f0</code>，而 <code>0x00005555555598f0 + 0x10</code> 剛好為 <code>0x0000555555559900</code>。<br><img src="https://i.imgur.com/KG73UsQ.png"></p>
-<p>且 <code>me</code> 的地址等價於 <code>&amp;logs[7]</code>，如此一來我們便可以利用 <code>edit</code> 且 <code>idx</code> 設為 7，對 <code>((Log)me)-&gt;msg)</code> ( 也就是 <code>0x0000555555559a00</code> ) 的內容進行改寫，但是只能寫入一個 <code>\x00</code> 。<br><img src="https://i.imgur.com/aEQYQ8Z.png"></p>
+<p><img src="/2022/02/18/AIS3-EOF-2021-final-logger/DXYGxdr.png"><br>當我們將 <code>len</code> 設為 1 時，<code>me</code> 將會如下圖<br><code>me</code> 當前所指向的地址為 <code>0x00005555555598f0</code>，而 <code>0x00005555555598f0 + 0x10</code> 剛好為 <code>0x0000555555559900</code>。<br><img src="/2022/02/18/AIS3-EOF-2021-final-logger/KG73UsQ.png"></p>
+<p>且 <code>me</code> 的地址等價於 <code>&amp;logs[7]</code>，如此一來我們便可以利用 <code>edit</code> 且 <code>idx</code> 設為 7，對 <code>((Log)me)-&gt;msg)</code> ( 也就是 <code>0x0000555555559a00</code> ) 的內容進行改寫，但是只能寫入一個 <code>\x00</code> 。<br><img src="/2022/02/18/AIS3-EOF-2021-final-logger/aEQYQ8Z.png"></p>
 <h3 id="從寫入-1-byte-x00-到任意長度任意內容"><a href="#從寫入-1-byte-x00-到任意長度任意內容" class="headerlink" title="從寫入 1 byte \x00 到任意長度任意內容"></a>從寫入 1 byte <code>\x00</code> 到任意長度任意內容</h3><p>有了前面的想法，我們可以嘗試獲得一個位於 <code>0x0000555555559a00</code> 的 <code>Log</code> 結構，且此結構中 <code>msg</code> 指向的地址為 <code>0x00005555555599XX</code>，再搭配上 <code>edit</code> 且 <code>idx</code> 設為 7，我們便可以控制 <code>((Log)me)-&gt;len)</code> 為任意長度。 ( 我們將此 <code>LOG</code> 存在 <code>logs[0]</code> )<br>要達到這樣的目標，我們只需要執行下面幾個步驟。</p>
 <ol>
 <li>new 一個大小為 0 的 LOG 放到 log[0]</li>
@@ -246,15 +246,15 @@
 <li>delete log[0]</li>
 <li>new 一個大小為 96 的 LOG 放到 log[0]</li>
 </ol>
-<p>執行完以上步驟，此時的 <code>logs[0]</code> 所指向的內容如下圖<br><img src="https://i.imgur.com/aplCyuz.png"></p>
+<p>執行完以上步驟，此時的 <code>logs[0]</code> 所指向的內容如下圖<br><img src="/2022/02/18/AIS3-EOF-2021-final-logger/aplCyuz.png"></p>
 <ol start="6">
 <li>edit 且 idx 設為 7 </li>
 </ol>
-<p>到了這步，我們已經可以控制 <code>0x0000555555559900</code> 的內容了，如此一來便能夠實現寫入任意長度任意內容。<br><img src="https://i.imgur.com/wvZlhft.png"></p>
+<p>到了這步，我們已經可以控制 <code>0x0000555555559900</code> 的內容了，如此一來便能夠實現寫入任意長度任意內容。<br><img src="/2022/02/18/AIS3-EOF-2021-final-logger/wvZlhft.png"></p>
 <ol start="7">
 <li>edit 且 idx 設為 0 寫入內容為 AAAAAAAA</li>
 </ol>
-<p><img src="https://i.imgur.com/zsuXfBH.png"></p>
+<p><img src="/2022/02/18/AIS3-EOF-2021-final-logger/zsuXfBH.png"></p>
 <h3 id="製作出-read-write-primitives"><a href="#製作出-read-write-primitives" class="headerlink" title="製作出 read/write primitives"></a>製作出 read/write primitives</h3><p>以下為 pseudo code<br>read primitives</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一個參數為 idx，後面為寫入的內容，addr 為目標地址</span></span><br><span class="line">my_edit(<span class="number">7</span>, p64(addr) + p64(<span class="number">0</span>) + <span class="string">b&quot;a&quot;</span> * <span class="number">7</span>)</span><br><span class="line">my_show(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>write primitives</p>
